@@ -1,0 +1,23 @@
+.ondas, .placar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+
+}
+
+.ondas > p {
+  padding: 5px;
+}
+
+.destaque {
+  color: orange;
+}
+
+main {
+  display: flex;
+  justify-content: space-around;
+}
+
+section {
+  flex: 1;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WSL</title>
+  <link rel="stylesheet" href="css/wsl.css">
+</head>
+<body>
+  <div id="app">
+    <form @submit.prevent="updateScore">
+      <label for="onda">Nota:</label>
+      <input type="number" min="0" max="10" step="0.1" id="onda" required v-model="notaDigitada">
+  
+      <label for="surfista">Surfista:</label>
+      <select name="surfista" id="surfista" v-model="surfista">
+        <option value="1" selected>{{ surfista1 }}</option>
+        <option value="2">{{ surfista2 }}</option>
+      </select>
+      <input type="submit" >
+    </form>
+  
+    <main>
+      <section>
+        <h1>{{ surfista1 }}</h1>
+        <div class="placar">
+          <div>
+            Onda 1 <br>
+            <span id="s1_onda1">{{ ondasS1.onda1 }}</span>
+          </div>
+          <div>
+            Onda 2 <br>
+            <span id="s1_onda2">{{ ondasS1.onda2 }}</span>
+          </div>
+          <div>
+            Total <br>
+            <span id="s1_total">{{ ondasS1.total }}</span> <br>
+            <span v-if="ondasS1.total > ondasS2.total">Vence por {{ ondasS1.total - ondasS2.total}}</span>
+            <span v-else-if="ondasS2.total > ondasS1.total">Perde por {{ ondasS2.total - ondasS1.total}}</span>
+          </div>
+        </div>
+        <h2>Ondas Surfadas</h2>
+        <div id="s1_ondas" class="ondas">
+          <p v-for="nota in notasS1" :class="{ destaque: eDestaque1(nota) }">
+            {{ nota}}
+          </p>
+
+        </div>
+      </section>
+  
+      <section>
+        <h1>{{ surfista2 }}</h1>
+        <div class="placar">
+          <div>
+            Onda 1 <br>
+            <span id="s2_onda1">{{ ondasS2.onda1 }}</span>
+          </div>
+          <div>
+            Onda 2 <br>
+            <span id="s2_onda2">{{ ondasS2.onda2 }}</span>
+          </div>
+          <div>
+            Total <br>
+            <span id="s2_total">{{ ondasS2.total }}</span> <br>
+            <span v-if="ondasS2.total > ondasS1.total">Vence por {{ ondasS2.total - ondasS1.total}}</span>
+            <span v-else-if="ondasS1.total > ondasS2.total">Perde por {{ ondasS1.total - ondasS2.total}}</span>
+          </div>
+        </div>
+        <h2>Ondas Surfadas</h2>
+        <div id="s2_ondas" class="ondas">
+          <p v-for="nota in notasS2"  :class="{ destaque: eDestaque2(nota) }">
+            {{ nota}}
+          </p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="js/wslVue.js"></script>
+</body>
+</html>
